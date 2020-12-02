@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+:root {
+  --line-border-fill: #3498db;
+  --line-border-empty: #e0e0e0;
+}
+
 /* global styles */
 
 * {
@@ -38,7 +43,7 @@ body {
 .progress-container::before {
   /* add empty content for it to show (::before) */
   content: '';
-  background-color: #e0e0e0;
+  background-color: var(--line-border-empty);
   position: absolute;
   top: 50%;
   left: 0;
@@ -50,7 +55,7 @@ body {
 
 /* the blue line */
 .progress {
-  background-color: #3498db;
+  background-color: var(--line-border-fill);
   /* so we can move it in the progress-container which is relative */
   position: absolute;
   top: 50%;
@@ -71,17 +76,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 3px solid #e0e0e0;
+  border: 3px solid var(--line-border-empty);
   transition: 0.4s ease;
 }
 
 /* if circle has the active class */
 .circle.active {
-  border-color: #3498db;
+  border-color: var(--line-border-fill);
 }
 
 .btn {
-  background-color: #3498db;
+  background-color: var(--line-border-fill);
   border-radius: 6px;
   border: 0;
   color: #fff;
@@ -101,6 +106,6 @@ body {
 }
 
 .btn:disabled {
-  background-color: #3498db;
+  background-color: var(--line-border-fill);
   cursor: not-allowed;
 }
