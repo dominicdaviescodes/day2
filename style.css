@@ -33,3 +33,31 @@ body {
   max-width: 100%;
   width: 350px;
 }
+
+/* the faint grey line */
+.progress-container::before {
+  /* add empty content for it to show (::before) */
+  content: '';
+  background-color: #e0e0e0;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 100%;
+  z-index: -1;
+}
+
+/* the blue line */
+.progress {
+  background-color: #3498db;
+  /* so we can move it in the progress-container which is relative */
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 0%;
+  z-index: -1;
+  transition: 0.4s ease;
+}
