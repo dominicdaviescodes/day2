@@ -7,13 +7,15 @@ The effect is purely CSS a line moves forward and back also highlighting the cir
 
 Controlling this is JS.  The buttons are clickable allowing a user to move forwards/back.
 
+![the project](/img/app.JPG)
+
 ### in summary
 Clicking Next takes us forward a step
 Clicking Prev takes us back a step
 At the start Prev is grey
 At the end Next is grey
 
-There is a calculation to perform allowing us to move precisely between step 1 to 2, 2 to 3 and 4 to 4 and back again. This isn't a neat 100 / 4 = 25 as it looks, but there are really only 3 clicks.
+There is a calculation to perform allowing us to move precisely between step 1 to 2, 2 to 3 and 4 to 4 and back again. This isn't a neat 100 / 4 = 25 as it looks, as there are really only 3 clicks each way.
 
 ### What DOM elements will we need?
 
@@ -130,4 +132,47 @@ prev.addEventListener('click', () => {
 
   update();
 });
+```
+![a photo of the project](/img/actives.JPG)
+### Now the circles are active we need the progress line to match up with them
+
+```js
+const actives = document.querySelectorAll('.active');
+```
+if we console log actives.length and circles.length we have actives on 2,3,4 and circles.length is always 4.
+
+## the math bit
+actives.length / circles.length * 100 gives us 50, 75, 100.  we'll need 33% from 1 - 2,  66% from 2-3 and 3 to step 4 will total 100%.
+
+### We need a % for our progress line to move using width css property
+
+subtracting 1 from actives.length and circles.length gives us the correct %.  As far as I can tell actives.length -1 gives us 3 possible steps and circles.length is now 3.  giving us 3 split 33% values on 2,3 and step 4.
+
+```js
+progress.style.width =
+    ((actives.length - 1) / (circles.length - 1)) * 100 + '%';
+
+```
+
+### Lets control when Prev and Next buttons are disabled.
+
+```js
+if (currentActive === 1) {
+  prev.disabled = true;
+} else if (currentActive === circles.length) {
+  next.disabled = true;
+``` 
+and when we're in the middle, steps 2 and 3.
+Prev and Next won't be disabled.
+```js
+
+  if (currentActive === 1) {
+    prev.disabled = true;
+  } else if (currentActive === circles.length) {
+    next.disabled = true;
+  } else {
+    prev.disabled = false;
+    next.disabled = false;
+  }
+}
 ```
